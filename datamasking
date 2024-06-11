@@ -1,0 +1,12 @@
+Identify Masked Columns
+
+SELECT 
+    t.name AS TableName, 
+    c.name AS ColumnName, 
+    m.masking_function AS MaskingFunction
+FROM 
+    sys.masked_columns AS m
+JOIN 
+    sys.columns AS c ON m.column_id = c.column_id AND m.object_id = c.object_id
+JOIN 
+    sys.tables AS t ON c.object_id = t.object_id;
