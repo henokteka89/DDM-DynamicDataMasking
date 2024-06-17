@@ -41,7 +41,7 @@ ALTER COLUMN Salary ADD MASKED WITH (FUNCTION = 'default()');
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
---Drop data masking (remove masking from masked columns
+--Drop data masking (remove masking from masked columns)
 ALTER TABLE [tablename]
 ALTER COLUMN [columnname] DROP MASKED
 ---------------------------------------------------------
@@ -53,8 +53,8 @@ GRANT UNMASK TO TestUser; -- Grant UNMASK permission to the user
 REVOKE UNMASK FROM TestUser; -- Revoke UNMASK permission from the user
 -----------------------------------------------------------------------
 ------------------------------------------------------------------------
--- Test users
+-- Test users (users must not be db_owners or sysadmins, users with either of these privileges can see masked data)
 EXECUTE AS USER = 'TestUser';
 SELECT * FROM dbo.Employees; -- Assuming this table has masked columns
-REVERT;
+REVERT; --Returns back to the previous user
 
